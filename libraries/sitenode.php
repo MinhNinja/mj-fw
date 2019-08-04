@@ -68,9 +68,8 @@ class sitenode{
         return $url;
     }
 
-    public function mapInput(&$res, $params){
+    public function mapInput(&$res, $params, $count = 0){
         if(count($this->input)){
-            $count = 0;
             foreach( $this->input as $key=>$format){
                 $res[$key] = $params[$count];
                 $count++;

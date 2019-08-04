@@ -43,12 +43,10 @@ class application{
         
         switch( $object ){
             case 'user' :
-                $user = session::get('_user');
-                if(empty($user)){
-                    $user = user::getInstance();
-                    session::set('_user', $user);
+                if( !isset( self::$factory['user'] ) ){
+                    self::$factory['user'] = user::getInstance();
                 }
-                return $user;
+                return self::$factory['user'];
             case 'input' :
                 if( !isset( self::$factory['input'] ) ){
                     self::$factory['input'] = new input(); 
@@ -70,6 +68,7 @@ class application{
             case 'session' :
             case 'ss' :
                 if( !isset( self::$factory['session'] ) ){
+                    if (!session_id()) session_start();
                     self::$factory['session'] = new session(); 
                 }
                 return self::$factory['session'];
@@ -83,7 +82,7 @@ class application{
     }
 
     public static function process(){
-
+        
         $controller = new controller();
         $controller->process();
     }
@@ -135,13 +134,6 @@ class application{
 
     public static function user(){
         return self::use('user');
-    }
-
-    public static function userId(){
-        $user = self::use('user');
-        if( property_exists($user, 'ID')) return $user->ID;
-        if( property_exists($user, 'id')) return $user->id;
-        return 0;
     }
 
 }

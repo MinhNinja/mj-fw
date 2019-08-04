@@ -13,6 +13,7 @@ namespace mj\libraries;
 
 use mj\config;
 use mj\libraries\application as App;
+use mj\libraries\debug;
 
 class sitemap{
 
@@ -42,7 +43,7 @@ class sitemap{
     }
 
     public function isHome(){
-
+        
         $current = App::use('env')->getCurrentUriPath();
         $current = App::env()->getConfigUrl( trim( $current, '/') . '/' );
         $current = str_replace( ['http://', 'https://'], '', $current);

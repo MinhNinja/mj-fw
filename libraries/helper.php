@@ -29,8 +29,8 @@ class helper{
             $checked = '';
             if( is_array($selected)){
                 if( in_array( $value, $selected)) $checked = ' selected ';
-            }else if( $selected !== null){
-                if( $value == $selected ) $checked = ' selected ';
+            }else if( $selected !== null && $value == $selected ){
+                $checked = ' selected ';
             }
 
             $html .= '<option value="'. $value .'"'. $checked .'>'.$text.'</option>';
@@ -46,7 +46,18 @@ class helper{
         return '<label for="' . $id . '">'.$label.'</label>' ;
     }
 
-    public static function genPagination($total, $link){
+    public static function isLastPage($total){
+        if($total > 0){
+            $offset = App::use('input')->getPageOffset();
+            $limit = config::$queryLimit;
+            $totalPage = floor( $total / $limit ) + 1;
+            $currentPage = floor( $offset / $limit ) + 1;
+            return $totalPage == $currentPage;
+        }
+        return false;
+    }
+
+    /*public static function genPagination($total, $link){
         
         $html = '';
 
@@ -91,7 +102,7 @@ class helper{
 
         return $html;
 
-    }
+    }*/
 
     public static function addUrlVar( $link, $params){
 
@@ -113,7 +124,7 @@ class helper{
         return $root . '?' . http_build_query($arr);
     }
 
-    public static function genPageInNav( $isActive, $pageTxt, $link){
+    /*public static function genPageInNav( $isActive, $pageTxt, $link){
         
         $tmpl = '<li class="page-item">';
         $tmpl .= '<a class="page-link';
@@ -121,7 +132,7 @@ class helper{
         $tmpl .= $pageTxt ; 
         $tmpl .= ' </a></li>';
         return $tmpl;
-    }
+    }*/
 
     public static function arrayToString($array){
         return '['. implode( '][', $array) .']';
@@ -180,4 +191,19 @@ class helper{
         return '<a class="" href="'.$link.'" ><i class="fas fa-'.$sortIcon.'"></i> '. $text .'</a>';
         
     }
+
+    public static function toMysql($string){
+        $date = \DateTime::createFromFormat( config::$dateTimeFormat , $string);
+        return $date ? $date->format('Y-m-d H:i:s') : false;
+    }
+
+    public static function toSiteDatetime($string){
+        $date = \DateTime::createFromFormat( 'Y-m-d H:i:s', $string);
+        return $date ? $date->format(config::$dateTimeFormat) : false;
+    }
+    public static function toSiteDate($string){
+        $date = \DateTime::createFromFormat( 'Y-m-d H:i:s', $string);
+        return $date ? $date->format(config::$dateFormat) : false;
+    }
+
 }

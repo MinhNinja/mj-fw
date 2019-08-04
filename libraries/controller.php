@@ -3,6 +3,7 @@ namespace mj\libraries;
 
 use mj\config;
 use mj\libraries\application as App;
+use mj\libraries\debug;
 
 class controller{
 
@@ -21,9 +22,9 @@ class controller{
         $routers = empty($this->path) ? config::$routers : config::$routers[$this->path];
         
         $task = $input->url()->find('task', 'cmd');
-        if(empty($task)) $task = config::$notFoundTask;
+        if(empty($task)) $task = config::$notFoundAction;
 
-        if( !isset($routers[$task]) ) $task = config::$notFoundTask;
+        if( !isset($routers[$task]) ) $task = config::$notFoundAction;
 
         $method = App::use('env')->getRequestMethod();
 
@@ -32,7 +33,7 @@ class controller{
         } else {
             $this->actions = isset($routers[$task][0]) ? $routers[$task] : ['notFound'];
         }
-           
+        
         $this->task = $task;
         $this->method = $method;
         
@@ -42,7 +43,7 @@ class controller{
 
         $okie = true; 
         foreach( $this->actions as $action){
-            if( !$okie ) continue;
+            if( !$okie ) break;
             $okie = $this->execute( $action );
         }
 
@@ -61,7 +62,7 @@ class controller{
     }
 
     public function execute( $action ){
-
+        
         $path = empty($this->path ) ? '' : $this->path.'\\';
         $class = 'mj\\actions\\'.$path. $action;
         $act = new $class( $this->task ); 

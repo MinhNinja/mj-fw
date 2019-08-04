@@ -10,12 +10,12 @@ class session{
         $_SESSION[$key] = $value;
     }
 
-    public function get($key, $format = ''){
-        return App::use('input')->session()->find($key, $format);
+    public function get($key){
+        return isset($_SESSION[$key]) ? $_SESSION[$key] : '';
     }
 
-    public function getOnce($key, $format = ''){
-        $tmp = $this->get($key, $format);
+    public function getOnce($key){
+        $tmp = $this->get($key);
         $this->set($key, null);
         return $tmp;
     }

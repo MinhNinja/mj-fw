@@ -96,6 +96,6 @@ class env{
     public function getConfigUrl($path = ''){
         $url = trim(config::$siteUrl, '/');
         $path = trim($path, '/');
-        return $url. '/' . $path;
+        return $url. '/' . $path. '/';
     }
 }

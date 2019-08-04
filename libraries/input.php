@@ -45,7 +45,7 @@ class input{
         }
     }
 
-    public function find( $key, $format = '' ){
+    public function find($key, $format = '' ){
 
         $this->value = isset($this->data[$key]) ? $this->data[$key] : null;
 
@@ -77,53 +77,53 @@ class input{
 
     public function get($key = null, $format = ''){
 
-        if( $key === null ){
+        if($key === null ){
             return $this->from($_GET);
         }
 
         $value = $this->url()->find($key, $format);
 
         // not found in Input, try POST
-        if( $this->value === null ){
+        if($this->value === null ){
             $value = $this->post()->find($key, $format);
         } else {
             return $value;
         }
         
         // not found in POST, try GET
-        if( $this->value === null ){
+        if($this->value === null ){
             $value = $this->get()->find($key, $format);
         }
 
         return $value;
     }
 
-    public function getPageOffset( $object = ''){
+    public function getPageOffset($object = ''){
         return $this->getStatus($object, 'start', 0);
     }
 
-    public function setPageOffset( $object = '', $default = 0){
-        session::set( $object.'.start', $default);
+    public function setPageOffset($object = '', $default = 0){
+        session::set($object.'.start', $default);
     }
 
-    public function getPageSort( $object = '', $default = 'id-ASC'){
+    public function getPageSort($object = '', $default = 'id-DESC'){
         return $this->getStatus($object, 'sort', $default);
     }
 
-    public function getStatus( $object, $key, $default){
+    public function getStatus($object, $key, $default){
 
         $tmp = $this->get()->find($key, '');
 
-        if( $tmp === null ){
-            $tmp = $this->session()->find( $object.'.'.$key, '');
-            if( $tmp === null ){
-                session::set( $object.'.'.$key, $default);
+        if($tmp === null ){
+            $tmp = $this->session()->find($object.'.'.$key, '');
+            if($tmp === null ){
+                session::set($object.'.'.$key, $default);
                 $tmp = $default;
             }
         }else{
-            $oldTmp = session::get( $object.'.'.$key, '');
-            if( $tmp !== $oldTmp ){
-                session::set( $object.'.'.$key, $tmp);
+            $oldTmp = session::get($object.'.'.$key, '');
+            if($tmp !== $oldTmp ){
+                session::set($object.'.'.$key, $tmp);
             }
         }
 

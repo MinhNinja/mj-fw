@@ -7,7 +7,7 @@ use mj\config;
 class user{
 
     public static function getInstance(){
-        
+
         if( empty(config::$classUser) ){
 
             $user = new \StdClass;
@@ -29,4 +29,5 @@ class user{
             throw new \Exception('Class not found '.$check);
         }
     }
-}
+
+} 
