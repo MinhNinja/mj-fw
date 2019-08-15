@@ -2,6 +2,8 @@
 
 namespace mj\actions;
 
+use mj\libraries\action;
+
 /**
  * process before main Action
  */
