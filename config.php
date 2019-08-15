@@ -1,7 +1,7 @@
 <?php
 /**
  * @package mj - PHP mini applciation for fast integration and implement
- * @version standalone
+ * @version standalone version
  * @author Pham Minh
  * @website http://minh.ninja
  * @github
@@ -13,6 +13,7 @@ namespace mj;
 class config{
 
     private static $mjVersion = '0.2';
+    private static $mjApp = 'mjApplication';
 
     // [ name_route, slug, params, task ]
     public static $endpoints = [

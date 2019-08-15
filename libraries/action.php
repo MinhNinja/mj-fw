@@ -1,6 +1,6 @@
 <?php
 
-namespace mj\actions;
+namespace mj\libraries;
 
 use mj\libraries\application as App;
 

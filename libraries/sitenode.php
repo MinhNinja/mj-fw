@@ -26,7 +26,7 @@ class sitenode{
         $this->slug = $slug; // TODO : $this->slug = wpx::get_option('sgcpNodeApp.'.$this->name));
         $this->task = $task;
 		$this->input = array();
-		$this->app	= APP_NAME;
+		$this->app	= config::$mjApp;
         foreach($properties as $key=>$format){
             // ordering of input is important
             $this->input[$key] = $format;
