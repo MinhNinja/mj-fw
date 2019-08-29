@@ -120,8 +120,8 @@ class application{
         return self::use('input');
     }
 
-    public static function sm(){
-        return self::use('sitemap');
+    public static function sm($key = null){
+        return ($key === null) ? self::use('sitemap') : self::use('sitemap')->get($key);
     }
 
     public static function ss(){
