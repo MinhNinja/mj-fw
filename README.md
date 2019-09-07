@@ -8,3 +8,7 @@ Check https://github.com/MinhNinja/mj to see how the application run standalone
 - Multi actions
 - Multi template support
 
+# TODO
+
+- Support notFound for restAPI ( now only for html format )
+
