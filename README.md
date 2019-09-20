@@ -13,4 +13,6 @@ Check https://github.com/MinhNinja/mj to see how the application run standalone
 - Support notFound for restAPI ( now only for html format )
 - We should group actions or have engine to improve task1 => [act1, act2]
 Consider change name_route = task + group  while group === cpath
+- should change prepareContent into general function, where decide how should the output be
+- consider a global stores for controller, where action can pass variables
 
